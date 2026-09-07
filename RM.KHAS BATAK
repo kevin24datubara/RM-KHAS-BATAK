@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>RM.KHAS BATAK - Masakan Khas Batak</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f5efe3;
+    color:#222;
+}
+
+header{
+    background:#5b3218;
+    color:white;
+    padding:25px 8%;
+    text-align:center;
+}
+
+header h1{
+    font-size:32px;
+    margin-bottom:8px;
+}
+
+header p{
+    font-size:15px;
+}
+
+.container{
+    width:90%;
+    max-width:1100px;
+    margin:30px auto;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:25px;
+    color:#5b3218;
+}
+
+.menu{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+.card{
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 4px 15px rgba(0,0,0,.12);
+}
+
+.card img{
+    width:100%;
+    height:230px;
+    object-fit:cover;
+    display:block;
+}
+
+.card-content{
+    padding:18px;
+}
+
+.card h3{
+    color:#5b3218;
+    margin-bottom:8px;
+}
+
+.price{
+    font-size:20px;
+    font-weight:bold;
+    color:#c0392b;
+    margin-bottom:15px;
+}
+
+.qty{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.qty button{
+    width:35px;
+    height:35px;
+    border:none;
+    border-radius:8px;
+    background:#5b3218;
+    color:white;
+    font-size:20px;
+    cursor:pointer;
+}
+
+.qty span{
+    min-width:30px;
+    text-align:center;
+    font-weight:bold;
+}
+
+.cart{
+    margin-top:35px;
+    background:white;
+    border-radius:15px;
+    padding:25px;
+    box-shadow:0 4px 15px rgba(0,0,0,.12);
+}
+
+.cart h2{
+    color:#5b3218;
+    margin-bottom:20px;
+}
+
+.cart-item{
+    display:flex;
+    justify-content:space-between;
+    padding:10px 0;
+    border-bottom:1px solid #ddd;
+}
+
+.total{
+    display:flex;
+    justify-content:space-between;
+    font-size:22px;
+    font-weight:bold;
+    margin-top:20px;
+}
+
+.checkout{
+    margin-top:30px;
+    background:#fff;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 4px 15px rgba(0,0,0,.12);
+}
+
+.checkout h2{
+    color:#5b3218;
+    margin-bottom:20px;
+}
+
+input,textarea{
+    width:100%;
+    padding:13px;
+    margin-bottom:15px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:15px;
+}
+
+textarea{
+    min-height:90px;
+    resize:vertical;
+}
+
+.location-box{
+    background:#f5efe3;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:15px;
+}
+
+.location-box button{
+    background:#2874a6;
+    color:white;
+    border:none;
+    padding:12px 18px;
+    border-radius:8px;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+.info{
+    margin-top:10px;
+    font-size:14px;
+    line-height:1.6;
+}
+
+.order-btn{
+    width:100%;
+    padding:16px;
+    border:none;
+    border-radius:10px;
+    background:#25d366;
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+.order-btn:hover{
+    background:#1ebe5d;
+}
+
+footer{
+    margin-top:40px;
+    background:#5b3218;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+@media(max-width:700px){
+    .menu{
+        grid-template-columns:1fr;
+    }
+
+    header h1{
+        font-size:26px;
+    }
+
+    .card img{
+        height:220px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>RM.KHAS BATAK</h1>
+    <p>Masakan Khas Batak • Nikmat • Lezat • Halal*</p>
+</header>
+
+<div class="container">
+
+    <h2 class="section-title">🍽️ MENU MAKANAN</h2>
+
+    <div class="menu">
+
+        <!-- MENU 1 -->
+        <div class="card">
+            <img src="pg.jpeg" alt="Panggang B2">
+            <div class="card-content">
+                <h3>Panggang B2 + Nasi</h3>
+                <div class="price">Rp35.000</div>
+
+                <div class="qty">
+                    <button onclick="ubahJumlah(0,-1)">−</button>
+                    <span id="qty0">0</span>
+                    <button onclick="ubahJumlah(0,1)">+</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MENU 2 -->
+        <div class="card">
+            <img src="arsik babi.jpg" alt="B2 Arsik">
+            <div class="card-content">
+                <h3>B2 Arsik + Nasi</h3>
+                <div class="price">Rp35.000</div>
+
+                <div class="qty">
+                    <button onclick="ubahJumlah(1,-1)">−</button>
+                    <span id="qty1">0</span>
+                    <button onclick="ubahJumlah(1,1)">+</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MENU 3 -->
+        <div class="card">
+            <img src="padar.jpg" alt="Manuk Napinadar">
+            <div class="card-content">
+                <h3>Manuk Napinadar + Nasi</h3>
+                <div class="price">Rp45.000</div>
+
+                <div class="qty">
+                    <button onclick="ubahJumlah(2,-1)">−</button>
+                    <span id="qty2">0</span>
+                    <button onclick="ubahJumlah(2,1)">+</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MENU 4 -->
+        <div class="card">
+            <img src="saksang bbi.jpg" alt="Saksang B2">
+            <div class="card-content">
+                <h3>Saksang B2 + Nasi</h3>
+                <div class="price">Rp35.000</div>
+
+                <div class="qty">
+                    <button onclick="ubahJumlah(3,-1)">−</button>
+                    <span id="qty3">0</span>
+                    <button onclick="ubahJumlah(3,1)">+</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MENU 5 -->
+        <div class="card">
+            <img src="ikan mas arsik.jpg" alt="Ikan Mas Arsik">
+            <div class="card-content">
+                <h3>Ikan Mas Arsik + Nasi</h3>
+                <div class="price">Rp35.000</div>
+
+                <div class="qty">
+                    <button onclick="ubahJumlah(4,-1)">−</button>
+                    <span id="qty4">0</span>
+                    <button onclick="ubahJumlah(4,1)">+</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- KERANJANG -->
+    <div class="cart">
+
+        <h2>🛒 Keranjang Pesanan</h2>
+
+        <div id="cartItems">
+            <p>Belum ada pesanan.</p>
+        </div>
+
+        <div class="total">
+            <span>Subtotal</span>
+            <span id="subtotal">Rp0</span>
+        </div>
+
+        <div class="total" style="font-size:18px;">
+            <span>Ongkir</span>
+            <span id="ongkir">Rp0</span>
+        </div>
+
+        <div class="total">
+            <span>Total</span>
+            <span id="total">Rp0</span>
+        </div>
+
+    </div>
+
+
+    <!-- CHECKOUT -->
+    <div class="checkout">
+
+        <h2>📝 Data Pemesan</h2>
+
+        <input
+            type="text"
+            id="nama"
+            placeholder="Nama lengkap"
+        >
+
+        <input
+            type="tel"
+            id="telepon"
+            placeholder="Nomor WhatsApp"
+        >
+
+        <textarea
+            id="alamat"
+            placeholder="Alamat lengkap pengantaran"
+        ></textarea>
+
+
+        <div class="location-box">
+
+            <strong>📍 Lokasi Pengantaran</strong>
+
+            <p class="info">
+                Tekan tombol di bawah untuk mengambil lokasi GPS
+                agar ongkir dapat dihitung.
+            </p>
+
+            <button onclick="ambilLokasi()">
+                📍 Ambil Lokasi Saya
+            </button>
+
+            <div class="info" id="lokasiInfo">
+                Lokasi belum diambil.
+            </div>
+
+        </div>
+
+
+        <button class="order-btn" onclick="pesanWhatsApp()">
+            📱 PESAN SEKARANG VIA WHATSAPP
+        </button>
+
+    </div>
+
+</div>
+
+
+<footer>
+    <p>© 2026 RM.KHAS BATAK</p>
+    <p>Masakan Khas Batak • Nikmat • Lezat</p>
+</footer>
+
+
+<script>
+
+const menu = [
+
+    {
+        nama: "Panggang B2 + Nasi",
+        harga: 35000
+    },
+
+    {
+        nama: "B2 Arsik + Nasi",
+        harga: 35000
+    },
+
+    {
+        nama: "Manuk Napinadar + Nasi",
+        harga: 45000
+    },
+
+    {
+        nama: "Saksang B2 + Nasi",
+        harga: 35000
+    },
+
+    {
+        nama: "Ikan Mas Arsik + Nasi",
+        harga: 35000
+    }
+
+];
+
+
+let jumlah = [0,0,0,0,0];
+
+let userLat = null;
+let userLng = null;
+
+
+/* KOORDINAT RM.KHAS BATAK */
+
+const STORE_LAT = 3.5846719881982914;
+const STORE_LNG = 98.64506695634965;
+
+
+/* FORMAT RUPIAH */
+
+function rupiah(angka){
+
+    return new Intl.NumberFormat(
+        "id-ID",
+        {
+            style:"currency",
+            currency:"IDR",
+            maximumFractionDigits:0
+        }
+    ).format(angka);
+
+}
+
+
+/* UBAH JUMLAH */
+
+function ubahJumlah(index, nilai){
+
+    jumlah[index] += nilai;
+
+    if(jumlah[index] < 0){
+        jumlah[index] = 0;
+    }
+
+    document.getElementById(
+        "qty" + index
+    ).textContent = jumlah[index];
+
+    updateCart();
+
+}
+
+
+/* HITUNG SUBTOTAL */
+
+function hitungSubtotal(){
+
+    let subtotal = 0;
+
+    for(let i=0;i<menu.length;i++){
+
+        subtotal += menu[i].harga * jumlah[i];
+
+    }
+
+    return subtotal;
+
+}
+
+
+/* HITUNG JARAK */
+
+function hitungJarak(lat1,lon1,lat2,lon2){
+
+    const R = 6371;
+
+    const dLat =
+        (lat2-lat1) * Math.PI / 180;
+
+    const dLon =
+        (lon2-lon1) * Math.PI / 180;
+
+    const a =
+        Math.sin(dLat/2) *
+        Math.sin(dLat/2) +
+
+        Math.cos(lat1 * Math.PI/180) *
+        Math.cos(lat2 * Math.PI/180) *
+        Math.sin(dLon/2) *
+        Math.sin(dLon/2);
+
+    const c =
+        2 * Math.atan2(
+            Math.sqrt(a),
+            Math.sqrt(1-a)
+        );
+
+    return R*c;
+
+}
+
+
+/* HITUNG ONGKIR */
+
+function hitungOngkir(jarak){
+
+    if(jarak <= 1){
+
+        return 10200;
+
+    }
+
+    if(jarak <= 4){
+
+        return Math.round(
+            10200 +
+            ((jarak-1)/3)*1000
+        );
+
+    }
+
+    const tambahan =
+        Math.ceil(jarak-4);
+
+    return 11200 + tambahan*2500;
+
+}
+
+
+/* UPDATE KERANJANG */
+
+function updateCart(){
+
+    const cart =
+        document.getElementById("cartItems");
+
+    let html = "";
+
+    for(let i=0;i<menu.length;i++){
+
+        if(jumlah[i] > 0){
+
+            const harga =
+                menu[i].harga * jumlah[i];
+
+            html += `
+                <div class="cart-item">
+                    <span>
+                        ${menu[i].nama}
+                        × ${jumlah[i]}
+                    </span>
+
+                    <strong>
+                        ${rupiah(harga)}
+                    </strong>
+                </div>
+            `;
+
+        }
+
+    }
+
+
+    if(html === ""){
+
+        html =
+            "<p>Belum ada pesanan.</p>";
+
+    }
+
+    cart.innerHTML = html;
+
+
+    const subtotal =
+        hitungSubtotal();
+
+    document.getElementById(
+        "subtotal"
+    ).textContent = rupiah(subtotal);
+
+
+    let ongkir = 0;
+
+    if(userLat !== null){
+
+        const jarak =
+            hitungJarak(
+                STORE_LAT,
+                STORE_LNG,
+                userLat,
+                userLng
+            );
+
+        ongkir =
+            hitungOngkir(jarak);
+
+    }
+
+
+    document.getElementById(
+        "ongkir"
+    ).textContent = rupiah(ongkir);
+
+
+    document.getElementById(
+        "total"
+    ).textContent =
+        rupiah(subtotal + ongkir);
+
+}
+
+
+/* AMBIL GPS */
+
+function ambilLokasi(){
+
+    if(!navigator.geolocation){
+
+        alert(
+            "Browser kamu tidak mendukung GPS."
+        );
+
+        return;
+
+    }
+
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position){
+
+            userLat =
+                position.coords.latitude;
+
+            userLng =
+                position.coords.longitude;
+
+
+            const jarak =
+                hitungJarak(
+                    STORE_LAT,
+                    STORE_LNG,
+                    userLat,
+                    userLng
+                );
+
+
+            const ongkir =
+                hitungOngkir(jarak);
+
+
+            document.getElementById(
+                "lokasiInfo"
+            ).innerHTML = `
+
+                <strong>Lokasi berhasil diambil ✅</strong><br>
+
+                Latitude:
+                ${userLat.toFixed(6)}<br>
+
+                Longitude:
+                ${userLng.toFixed(6)}<br>
+
+                Jarak:
+                ${jarak.toFixed(2)} km<br>
+
+                Ongkir:
+                ${rupiah(ongkir)}
+
+            `;
+
+
+            updateCart();
+
+        },
+
+        function(error){
+
+            alert(
+                "Lokasi tidak dapat diambil. Pastikan GPS aktif dan izinkan akses lokasi."
+            );
+
+        },
+
+        {
+            enableHighAccuracy:true,
+            timeout:10000,
+            maximumAge:0
+        }
+
+    );
+
+}
+
+
+/* PESAN WHATSAPP */
+
+function pesanWhatsApp(){
+
+    const nama =
+        document.getElementById("nama")
+        .value.trim();
+
+    const telepon =
+        document.getElementById("telepon")
+        .value.trim();
+
+    const alamat =
+        document.getElementById("alamat")
+        .value.trim();
+
+
+    if(!nama){
+
+        alert("Masukkan nama terlebih dahulu.");
+
+        return;
+
+    }
+
+
+    if(!telepon){
+
+        alert("Masukkan nomor WhatsApp.");
+
+        return;
+
+    }
+
+
+    if(!alamat){
+
+        alert("Masukkan alamat pengantaran.");
+
+        return;
+
+    }
+
+
+    let adaPesanan = false;
+
+    let detail = "";
+
+
+    for(let i=0;i<menu.length;i++){
+
+        if(jumlah[i] > 0){
+
+            adaPesanan = true;
+
+            detail +=
+                `• ${menu[i].nama} x${jumlah[i]} = ${rupiah(menu[i].harga * jumlah[i])}\n`;
+
+        }
+
+    }
+
+
+    if(!adaPesanan){
+
+        alert(
+            "Silakan pilih makanan terlebih dahulu."
+        );
+
+        return;
+
+    }
+
+
+    if(userLat === null){
+
+        alert(
+            "Silakan ambil lokasi GPS terlebih dahulu."
+        );
+
+        return;
+
+    }
+
+
+    const subtotal =
+        hitungSubtotal();
+
+
+    const jarak =
+        hitungJarak(
+            STORE_LAT,
+            STORE_LNG,
+            userLat,
+            userLng
+        );
+
+
+    const ongkir =
+        hitungOngkir(jarak);
+
+
+    const total =
+        subtotal + ongkir;
+
+
+    const mapUrl =
+        `https://www.google.com/maps?q=${userLat},${userLng}`;
+
+
+    const pesan =
+
+`*PESANAN RM.KHAS BATAK*
+
+*Data Pemesan*
+Nama: ${nama}
+WhatsApp: ${telepon}
+Alamat: ${alamat}
+
+*Pesanan*
+${detail}
+Subtotal: ${rupiah(subtotal)}
+Jarak: ${jarak.toFixed(2)} km
+Ongkir: ${rupiah(ongkir)}
+*TOTAL: ${rupiah(total)}*
+
+Lokasi GPS:
+${mapUrl}
+
+Metode Pembayaran: COD
+
+Mohon konfirmasi pesanan saya. Terima kasih.`;
+
+
+    const nomor =
+        "6281370729116";
+
+
+    const url =
+        `https://wa.me/${nomor}?text=${encodeURIComponent(pesan)}`;
+
+
+    window.open(url,"_blank");
+
+}
+
+
+updateCart();
+
+</script>
+
+</body>
+</html>
